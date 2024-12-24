@@ -1,123 +1,143 @@
-import React from "react";
-import logo from "../../assets/images/logo.png";
-import app from "../../assets/images/app.png";
-
-
-
+import { FaInstagram, FaFacebookF, FaYoutube } from "react-icons/fa";
+import {
+  MdLocalMovies,
+  MdTheaterComedy,
+  MdSportsSoccer,
+  MdEvent,
+} from "react-icons/md";
+import { IoDocumentTextSharp } from "react-icons/io5";
+import { PiStarFour } from "react-icons/pi";
+import { FaRegCircleQuestion } from "react-icons/fa6";
+import { FiPhone } from "react-icons/fi";
+import logo from "@/assets/logos/logo.png";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white py-8">
-      <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        {/* Logo and App Links */}
-        <div className="flex flex-col items-start">
-          <div className="flex items-center mb-4">
-            {/* Replace with your logo */}
-            <div className="h-20 w-20"> <img src={logo} className="w-full h-full object-contain" alt="" />
- </div>
+    <footer className="dark:bg-[#111111] dark:text-white text-black py-10 mb-4">
+      <div className="container mx-auto px-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div>
+          <div className="flex space-x-2 items-center mb-4">
+            <Link to={"/"}>
+              <img
+                src={logo}
+                alt="logo"
+                className="w-[55px] h-9 cursor-pointer hover:opacity-75"
+              />
+            </Link>
           </div>
-          <div className="flex flex-col gap-2">
-            <a href="#" className="flex items-center">
+          <div className="mb-4">
+            <a
+              href="https://play.google.com/store"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block mb-2"
+            >
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
                 alt="Google Play"
-                className="h-10"
+                className="w-36 cursor-pointer hover:opacity-75"
               />
             </a>
-            <a href="#" className="flex items-center bg-black">
+            <a
+              href="https://www.apple.com/app-store/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block"
+            >
               <img
-                src={app}
+                src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
                 alt="App Store"
-                className="h-12"
+                className="w-36 cursor-pointer hover:opacity-75"
               />
             </a>
           </div>
         </div>
 
-        {/* About Section */}
         <div>
-          <h3 className="text-lg font-semibold mb-4">О нас</h3>
-          <ul className="space-y-2">
-            <li>
-              <a href="#" className="text-gray-400 hover:text-red-500">
-                Публичная оферта
-              </a>
+          <h3 className="text-lg font-semibold mb-4">About us</h3>
+          <ul>
+            <li className="hover:underline hover:text-red-500 cursor-pointer mb-2 flex items-center">
+              <IoDocumentTextSharp className="text-red-500 mr-2" />
+              <Link to="#">Public offer</Link>
             </li>
-            <li>
-              <a href="#" className="text-gray-400 hover:text-red-500">
-                Реклама
-              </a>
+            <li className="hover:underline hover:text-red-500 cursor-pointer mb-2 flex items-center">
+              <PiStarFour className="text-red-500 mr-2" />
+              <Link to="#">Advertising</Link>
             </li>
-            <li>
-              <a href="#" className="text-gray-400 hover:text-red-500">
-                F.A.Q
-              </a>
+            <li className="hover:underline hover:text-red-500 cursor-pointer mb-2 flex items-center">
+              <FaRegCircleQuestion className="text-red-500 mr-2" />
+              <Link to="#">F.A.Q</Link>
             </li>
-            <li>
-              <a href="#" className="text-gray-400 hover:text-red-500">
-                Контакты
-              </a>
+            <li className="hover:underline hover:text-red-500 cursor-pointer flex items-center">
+              <FiPhone className="text-red-500 mr-2" />
+              <Link to="#">Contacts</Link>
             </li>
           </ul>
         </div>
 
-        {/* Categories Section */}
         <div>
-          <h3 className="text-lg font-semibold mb-4">Категории</h3>
-          <ul className="space-y-2">
-            <li>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-red-500 flex items-center"
-              >
-                <span className="material-icons mr-2">movie</span> Кино
-              </a>
+          <h3 className="text-lg font-semibold mb-4">Categories</h3>
+          <ul>
+            <li className="hover:underline hover:text-red-500 cursor-pointer mb-2 flex items-center">
+              <MdLocalMovies className="text-red-500 mr-2" />
+              <Link to="/movies">Movie</Link>
             </li>
-            <li>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-red-500 flex items-center"
-              >
-                <span className="material-icons mr-2">theaters</span> Театр
-              </a>
+            <li className="hover:underline hover:text-red-500 cursor-pointer mb-2 flex items-center">
+              <MdTheaterComedy className="text-red-500 mr-2" />
+              <Link to="#">Theatre</Link>
             </li>
-            <li>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-red-500 flex items-center"
-              >
-                <span className="material-icons mr-2">event</span> Концерты
-              </a>
+            <li className="hover:underline hover:text-red-500 cursor-pointer mb-2 flex items-center">
+              <MdEvent className="text-red-500 mr-2" />
+              <Link to="#">Concerts</Link>
             </li>
-            <li>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-red-500 flex items-center"
-              >
-                <span className="material-icons mr-2">sports_basketball</span>{" "}
-                Спорт
-              </a>
+            <li className="hover:underline hover:text-red-500 cursor-pointer flex items-center">
+              <MdSportsSoccer className="text-red-500 mr-2" />
+              <Link to="#">Sport</Link>
             </li>
           </ul>
         </div>
 
-        {/* Contact Section */}
         <div>
-          <h3 className="text-lg font-semibold mb-4">Связаться с нами</h3>
-          <p className="text-red-500 text-lg mb-4">+998 (95) 897-33-38</p>
-          <h3 className="text-lg font-semibold mb-4">Социальные сети</h3>
+          <h3 className="text-lg font-semibold mb-4">Contact us</h3>
+          <a
+            href="tel:+998958973338"
+            className="text-red-500 mb-6 cursor-pointer hover:underline hover:text-red-600"
+          >
+            +998 (95) 897-33-38
+          </a>
+          <h3 className="text-lg font-semibold mb-4">Social media</h3>
           <div className="flex space-x-4">
-            <a href="#" className="text-red-500 hover:text-white">
-              <i className="fab fa-instagram"></i>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-red-500 text-2xl cursor-pointer hover:text-red-600 transition"
+            >
+              <FaInstagram />
             </a>
-            <a href="#" className="text-red-500 hover:text-white">
-              <i className="fab fa-facebook"></i>
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-red-500 text-2xl cursor-pointer hover:text-red-600 transition"
+            >
+              <FaFacebookF />
             </a>
-            <a href="#" className="text-red-500 hover:text-white">
-              <i className="fab fa-youtube"></i>
+            <a
+              href="https://youtube.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-red-500 text-2xl cursor-pointer hover:text-red-600 transition"
+            >
+              <FaYoutube />
             </a>
           </div>
         </div>
+      </div>
+
+      <div className="text-center text-sm text-gray-400 mt-8">
+        © {new Date().getFullYear()} Your Company. All Rights Reserved.
       </div>
     </footer>
   );

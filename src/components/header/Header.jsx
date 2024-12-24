@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { Link} from 'react-router-dom'
-import logo from "../../assets/images/logo.png"
+import logo from "../../assets/logo.png"
 import { useTranslation } from 'react-i18next';
 import { FaMoon } from "react-icons/fa";
 import { FaRegSun } from "react-icons/fa6";
