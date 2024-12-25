@@ -4,8 +4,7 @@ import Movies from "@/components/movies/Movies";
 import React, { memo, useEffect, useState } from "react";
 import Pagination from "@mui/material/Pagination";
 import Genre from "../../components/genre/Genre";
-import Header from "../../components/header/Header";
-import Footer from "../../components/footer/Footer";
+
 
 const Home = () => {
   const [data, setData] = useState(null);
@@ -43,7 +42,6 @@ const Home = () => {
 
   return (
     <div className="bg-secondar text-white  bg-white dark:bg-gray-900">
-      <Header />
       <Genre
         selectGenre={selectGenre}
         data={genres}
@@ -60,7 +58,6 @@ const Home = () => {
           className="ext-blue-600/100"
         />
       </div>
-      <Footer/>
     </div>
   );
 };
