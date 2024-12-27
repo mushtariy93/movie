@@ -1,19 +1,19 @@
-import i18n from "i18next";
+import { translationUz } from "./uz";
+import { translationEn } from "./en";
+import { translationRu } from "./ru";
 import { initReactI18next } from "react-i18next";
-import { tanslationUz } from "./uz";
-import { tanslationEn } from "./en";
-import { tanslationRu } from "./ru";
+import i18n from "i18next";
 
 i18n.use(initReactI18next).init({
-  lang: "en",
-  fallbackLng: "en",
+  lng: localStorage.getItem("lang_code") || "en",
+  fallbackLng: localStorage.getItem("lang_code") || "en",
   interpolation: {
     escapeValue: false,
   },
   resources: {
-    en: { translation: tanslationEn },
-    ru: { translation: tanslationRu },
-    uz: { translation: tanslationUz },
+    en: { translation: translationEn },
+    ru: { translation: translationRu },
+    uz: { translation: translationUz },
   },
 });
 

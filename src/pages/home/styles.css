@@ -8,10 +8,16 @@
   font-size: 18px;
   background: #fff;
 
-  /* Center slide text vertically */
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .swiper {
@@ -27,26 +33,27 @@
 }
 
 .mySwiper2 {
-  height: 600px;
+  height: 640px;
   width: 100%;
 }
+
 .mySwiper2 .swiper-slide {
   border-radius: 12px;
   overflow: hidden;
 }
 
 .mySwiper {
-  height: 100px;
-  width: 500px;
+  height: 90px;
   box-sizing: border-box;
-  padding: 20px 0;
+  padding: 10px 0;
+  width: 500px;
 }
 
 .mySwiper .swiper-slide {
   width: 25%;
   height: 100%;
   opacity: 0.4;
-  border-radius: 16px;
+  border-radius: 10px;
   overflow: hidden;
 }
 
@@ -60,6 +67,7 @@
   height: 100%;
   object-fit: cover;
 }
+
 .CardSwiper .swiper-button-next,
 .CardSwiper .swiper-button-prev,
 .mySwiper .swiper-button-next,
@@ -84,10 +92,20 @@
 .mySwiper .swiper-button-next::after,
 .mySwiper .swiper-button-prev::after {
   color: white;
-  font-size: 15px;
+  font-size: 20px;
 }
 
-.CardSwiper {
-  height: auto;
-  width: 100%;
+@media (max-width: 720px) {
+  .mySwiper2 {
+    height: 500px;
+  }
+}
+@media (max-width: 550px) {
+  .mySwiper {
+    width: 300px;
+    height: 80px;
+  }
+  .mySwiper2 {
+    height: 350px;
+  }
 }

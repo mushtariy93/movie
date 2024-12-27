@@ -1,95 +1,98 @@
-
-import React from 'react'
-import { Link} from 'react-router-dom'
-import logo from "../../assets/logo.png"
-import { useTranslation } from 'react-i18next';
+import React, { useState, useEffect } from "react";
+import logo from "@/assets/logo.png";
+import { Link, NavLink } from "react-router-dom";
 import { FaMoon } from "react-icons/fa";
-import { FaRegSun } from "react-icons/fa6";
+import { useTranslation } from "react-i18next";
+import i18n from "../../lang";
+import { MdLightMode } from "react-icons/md";
+import { HEADER_LINKS } from "../../static";
 
 const LANGUAGES = [
-  { label: "Uzbek", code: "uz" },
   { label: "English", code: "en" },
+  { label: "Uzbek", code: "uz" },
   { label: "Russian", code: "ru" },
 ];
 
+const Header = () => {
+  const [dark, setDark] = useState(() => {
+    return localStorage.getItem("dark_mode") || true;
+  });
+  const { i18n, t } = useTranslation();
 
-
-
-const Header = ({fn,val}) => {
-    const { i18n, t } = useTranslation();
-    function changeLang(e) {
-      const lang_code = e.target.value;
-      i18n.changeLanguage(lang_code);
+  useEffect(() => {
+    if (dark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
     }
+  }, [dark]);
+
+  const toggleDarkMode = () => {
+    setDark((prevDark) => {
+      const newDarkMode = !prevDark;
+      localStorage.setItem("dark_mode", newDarkMode);
+      return newDarkMode;
+    });
+  };
+
+  const changeLang = (e) => {
+    const lang_code = e.target.value;
+    i18n.changeLanguage(lang_code);
+    localStorage.setItem("lang_code", lang_code); 
+  };
 
   return (
-    <header className="bg-black">
-      <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-        <div class="flex h-16 items-center justify-between">
-          <div class="w-24 h-12">
-            <img src={logo} className="w-full h-full object-contain" alt="" />
-          </div>
-
-          <nav className="flex items-center gap-x-4">
-            <Link to="/" className="text-white text-lg ">
-              {t("header.nav.item1")}
-            </Link>
-            <Link to="#" className="text-white text-lg ">
-              {t("header.nav.item2")}
-            </Link>
-            <Link to="#" className="text-white text-lg ">
-              {t("header.nav.item3")}
-            </Link>
-          </nav>
-          <div className="flex items-center ">
-            <select
-              defaultValue={i18n.language}
-              onChange={changeLang}
-              className="  bg-gray-300 dark:bg-gray-700 dark:text-white rounded-lg py-1 px-2 outline-none"
-            >
-              {LANGUAGES.map((item) => (
-                <option key={item.code} value={item.code}>
-                  {item.label}
-                </option>
-              ))}
-            </select>
-            <button
-              onClick={fn}
-              className={
-                val
-                  ? "w-12 h-7 border border-gray-400 flex items-center justify-start px-2 rounded-full outline-none duration-200"
-                  : "w-12 h-7 border border-white flex items-center justify-end px-2 rounded-full outline-none duration-200"
-              }
-            >
-              {val ? (
-                <FaMoon className="text-blue-600" />
-              ) : (
-                <FaRegSun className="text-yellow-500" />
-              )}
-            </button>
-          </div>
-
-          <div class="flex items-center">
-            <div class="sm:flex sm:gap-4">
-              <Link
-                class="rounded-md bg-red-600 px-5 py-2 text-lg font-medium text-white shadow"
-                to="/login"
-              >
-                Login
-              </Link>
-            </div>
-
-            
-          </div>
+    <header
+      id="header"
+      className="w-full h-[80px] bg-white dark:bg-black sticky top-0 left-0 z-20 shadow-md"
+    >
+      <nav className="container relative mx-auto px-4 h-full flex items-center justify-between flex-wrap">
+        <div className="flex items-center gap-4">
+          <Link to="/">
+            <img
+              src={logo}
+              alt="logo"
+              className="w-[112px] h-9 max-[500px]:w-[100px] max-[500px]:h-7"
+            />
+          </Link>
         </div>
-      </div>
+        <ul className="text-black flex dark:text-white gap-10 flex-wrap max-[650px]:fixed max-[650px]:bottom-0 max-[650px]:left-0 max-[650px]:bg-[white] max-[650px]:w-full max-[650px]:justify-evenly max-[650px]:dark:bg-black max-[650px]:-z-50">
+          {HEADER_LINKS.map((link) => (
+            <li key={link.id} className="flex flex-col items-center">
+              <NavLink
+                to={link.url}
+                className="flex flex-col items-center gap-1 max-[650px]:gap-0 max-[650px]:py-1 max-[650px]:text-[12px]"
+              >
+                {link.icon}
+                <p>{t(`header.nav.${link.title}`)}</p>
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+
+        <div className="flex items-center gap-5">
+          <select
+            className="bg-gray-300 dark:bg-slate-800 dark:text-white rounded-lg py-2 px-2 outline-none"
+            defaultValue={localStorage.getItem("lang_code") || i18n.language}
+            onChange={changeLang}
+          >
+            {LANGUAGES.map((lang) => (
+              <option key={lang.code} value={lang.code}>
+                {lang.label}
+              </option>
+            ))}
+          </select>
+
+          <button
+            onClick={toggleDarkMode}
+            className="text-2xl text-gray-700 dark:text-white"
+          >
+            {dark ? <MdLightMode className="text-[gold]" /> : <FaMoon />}
+          </button>
+        </div>
+      </nav>
     </header>
   );
-}
+};
 
-export default Header
-
-
-
-
-
+export default Header;

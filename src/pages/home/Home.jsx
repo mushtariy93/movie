@@ -1,64 +1,38 @@
-import { request } from "@/api";
-import Carousel from "@/components/carousel/Carousel";
-import Movies from "@/components/movies/Movies";
 import React, { memo, useEffect, useState } from "react";
-import Pagination from "@mui/material/Pagination";
-import Genre from "../../components/genre/Genre";
-
+import { request } from "@/api";
+import { useLocation } from "react-router-dom";
+import Hero from "./Hero";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "../../components/loading/Loading";
+import Movies from "../../components/movies/Movies";
 
 const Home = () => {
-  const [data, setData] = useState(null);
-  const [page, setPage] = useState(1);
-  const [genres, setGenres] = useState(null);
-  const [selectGenre, setSelectGender] = useState([]);
-  
-
-  console.log(data);
-
-  const handleChange = (event, value) => {
-    setPage(value);
-  };
-  console.log(page);
-
-  useEffect(() => {
-    request.get("/genre/movie/list").then((res) => setGenres(res.data.genres));
-  }, []);
-
-  console.log(genres);
-
-  useEffect(() => {
-    request("/discover/movie", {
-      params: {
-        page,
-        without_genres: "18,10749,99",
-        with_genres: selectGenre.join(","),
-      },
-    }).then((res) => {
-      setData(res.data);
-    });
-  }, [page, selectGenre]);
+  const { data: movie, isPending } = useQuery({
+    queryKey: ["movie"],
+    queryFn: () =>
+      request
+        .get("/discover/movie", {
+          params: {
+            without_genre: "18,99",
+          },
+        })
+        .then((res) => res.data),
+  });
+  const location = useLocation();
 
   
 
   return (
-    <div className="bg-secondar text-white  bg-white dark:bg-gray-900">
-      <Genre
-        selectGenre={selectGenre}
-        data={genres}
-        setSelectGender={setSelectGender}
-      />
-      <Carousel movies={data?.results} />
-
-      <Movies data={data} />
-      <div className="flex justify-center py-6">
-        <Pagination
-          page={page}
-          onChange={handleChange}
-          count={data?.total_pages <= 500 ? data.total_pages : 500}
-          className="ext-blue-600/100"
-        />
-      </div>
-    </div>
+    <>
+      {isPending && (
+        <div className="text-center text-2xl min-h-screen flex justify-center items-center text-red-600 ">
+     
+          <Loading />
+        </div>
+      )}
+      <Hero movies={movie?.results} />
+      <Movies data={movie?.results} />
+    </>
   );
 };
 
